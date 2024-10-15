@@ -15,6 +15,9 @@ import plumber2 from '../assets/images/plumbing2.jpg'
 import plumber3 from '../assets/images/plumbing3.jpeg'
 import plumber4 from '../assets/images/plumbing4.jpg'
 import Featured from '../assets/Components/Featured/Featured';
+import influencer from '../assets/images/woman.png'
+import ContactUs from '../assets/Components/Contact-Section/ContactUs';
+
 
 
 
@@ -154,8 +157,35 @@ const Home = () => {
             </section>
 
             <section className="w-full flex my-10 flex-col items-center">
-                <Featured/>
+                <Featured />
             </section>
+
+
+            <section className="w-full flex flex-row  justify-center items-center p-10  ">
+                <div className="w-[80em] flex flex-row justify-center items-center">
+                    <div className="w-full flex flex-col">
+                        <h1 className="text-primary font-bold lato text-2xl mb-2">Top Influencers in your Location</h1>
+                        <p className="text-gray-800 font-medium lato text-md mt-2 tracking-wide leading-relaxed">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Maxime, enim, alias quaerat, adipisci est odio expedita
+                            non magnam animi libero provident consequuntur dicta
+                            asperiores eaque veniam! Autem quam sint maiores. Lorem
+                            ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+                    </div>
+
+
+                    <div className="w-full grid grid-cols-2">
+                        <img className="w-auto h-[15em] object-cover" src={influencer} alt="" />
+                        <img className="w-auto h-[15em] object-cover" src={influencer} alt="" />
+                        <img className="w-auto h-[15em] object-cover" src={influencer} alt="" />
+                        <img className="w-auto h-[15em] object-cover" src={influencer} alt="" />
+                    </div>
+                </div>
+
+            </section>
+
+
+            <ContactUs/>
 
         </div>
     )

@@ -12,7 +12,7 @@ const Featured = () => {
         <p className="f-title">FEATURED MEMBERS IN YOUR LOCATION</p>
         <h1>Top-Rated Experts Ready to Serve</h1>
         <div className="f-cards">
-          <a href="/profile">
+          <a href="/jonash">
             <div className="f-card">
               <span className="f-close" />
               <span className="f-arrow" />
@@ -51,7 +51,7 @@ const Featured = () => {
             </div>
           </a>
 
-          <a href="/profile">
+          <a href="/janela">
             <div className="f-card">
               <span className="f-close" />
               <span className="f-arrow" />
