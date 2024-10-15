@@ -5,9 +5,9 @@ const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   return (
-    <nav className="w-full p-6 flex bg-white flex-row items-center justify-between fixed top-0 border-b border-[#E4E4E4] left-0">
-      <img className="w-auto h-[4em]" src={logo} alt="" />
-      <ul className="text-[#666666] flex flex-row gap-10 relative">
+    <nav className="w-full p-4 flex bg-white flex-row items-center justify-between fixed top-0 border-b border-[#E4E4E4] left-0 z-50">
+      <img className="w-auto h-[3em]" src={logo} alt="" />
+      <ul className="text-[#666666] text-[0.8em] font-medium flex flex-row gap-10 relative">
         <li
           className="relative"
           onMouseEnter={() => setShowDropdown(true)}
@@ -16,7 +16,7 @@ const Navbar = () => {
           <a href="#">OUR STORY</a>
           {showDropdown && (
            <div
-           className="absolute top-full right-0 bg-white border w-[50em] p-10 flex flex-row items-center justify-center gap-6 shadow-lg"
+           className="absolute top-full right-0 bg-white border w-[60em] p-10 flex flex-row items-center justify-center gap-6 shadow-lg"
          >
            <img className="h-auto w-[30em]" src={logo} alt="" />
            <div className="flex flex-col mx-10 w-full">

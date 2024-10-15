@@ -20,3 +20,23 @@
         border-color: transparent;
     }
 }
+
+.pencil-line {
+    top: 0;
+    left: 0;
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    transition: stroke-dashoffset 2s;
+}
+
+.pencil {
+    transition: left 2s;
+}
+
+.services-container.animate .pencil-line {
+    stroke-dashoffset: 0;
+}
+
+.services-container.animate .pencil {
+    left: 14.4em;
+}
