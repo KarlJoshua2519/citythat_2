@@ -1,0 +1,164 @@
+/* Modal Overlay */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    /* Darker overlay for emphasis */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #f7f7f7, #ffffff);
+    padding: 40px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 450px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    transform: scale(0.95);
+    animation: zoomIn 0.3s ease-out forwards;
+}
+
+.modal-title {
+    color: #b85b00;
+    font-size: 30px;
+}
+
+
+/* Close Button */
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: #333;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+.modal-close:hover {
+    color: #ff6b6b;
+}
+
+.application-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.application-form input,
+.application-form select,
+.application-form textarea {
+    padding: 15px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    width: 100%;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.application-form input:focus,
+.application-form select:focus,
+.application-form textarea:focus {
+    border-color: #e0ff80;
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 187, 0, 0.4);
+    background: #f0f8ff;
+}
+
+.application-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.application-form input[type="file"] {
+    padding: 10px;
+    border: none;
+    background: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.application-form input[type="file"]:hover {
+    background-color: #ececec;
+}
+
+.application-form label {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+}
+
+.application-form input[type="checkbox"] {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.application-form button {
+    padding: 15px;
+    background: linear-gradient(135deg, #b85b00, #8d4701);
+    color: #e0ff80;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s;
+    box-shadow: 0 6px 15px rgba(255, 187, 0, 0.3);
+}
+
+.application-form button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    /* Hover lift effect */
+}
+
+.application-form button:active {
+    transform: scale(0.98);
+    /* Subtle press effect */
+}
+
+
+/* Animations */
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        max-width: 400px;
+    }
+    .application-form button {
+        font-size: 14px;
+    }
+}

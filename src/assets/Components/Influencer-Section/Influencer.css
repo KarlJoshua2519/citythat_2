@@ -1,0 +1,133 @@
+.influencer-container {
+    width: 100%;
+    margin: 50px auto;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.main-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.selector-container {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.selector-container label {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.location-select {
+    padding: 12px;
+    font-size: 1em;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 300px;
+}
+
+.top-influencers {
+    margin-top: 20px;
+}
+
+.top-influencers h2 {
+    text-align: center;
+    font-size: 1.5em;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.influencer-carousel {
+    overflow: hidden;
+    position: relative;
+    margin: 0 60px;
+    padding: 20px;
+}
+
+.influencer-carousel-inner {
+    display: flex;
+    animation: scroll 200s linear infinite;
+    gap: 20px;
+}
+
+.influencer-carousel:hover .influencer-carousel-inner {
+    animation-play-state: paused;
+}
+
+.influencer-card {
+    background-color: #f8f8f8;
+    border-radius: 12px;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.influencer-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #b85b00;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.influencer-card h3 {
+    font-size: 1.3em;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.followers,
+.category {
+    font-size: 1em;
+    color: #666;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-400%);
+    }
+}
+
+.apply-container {
+    text-align: center;
+    margin: 30px;
+}
+
+.apply-btn {
+    padding: 12px 24px;
+    margin: 20px 0;
+    font-size: 1.1em;
+    color: #fff;
+    background-color: #b85b00;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.apply-btn:hover {
+    background-color: #994d00;
+    transform: scale(1.05);
+}
