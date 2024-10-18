@@ -95,10 +95,10 @@ const Jonash = () => {
 
 
 
-    const [editingResume, setEditingResume] = useState(null); // Track which resume is being edited
-    const [newName, setNewName] = useState(''); // Track new name input
+    const [editingResume, setEditingResume] = useState(null); 
+    const [newName, setNewName] = useState(''); 
 
-    // Resume options
+   
     const resumes = {
         construction: {
             files: [resume1, resume2],
@@ -111,27 +111,27 @@ const Jonash = () => {
         },
     };
 
-    // Function to handle resume click
+
     const handleResumeClick = (key) => {
-        setActiveResumes(resumes[key].files); // Set active resumes based on the clicked option
+        setActiveResumes(resumes[key].files); 
     };
 
-    // Function to handle name change
+    
     const handleNameChange = (key) => {
         if (newName.trim()) {
             setResumeNames({
                 ...resumeNames,
-                [key]: newName, // Update the specific resume name
+                [key]: newName, 
             });
         }
-        setEditingResume(null); // Exit editing mode
-        setNewName(''); // Reset new name
+        setEditingResume(null); 
+        setNewName(''); 
     };
 
-    // Function to handle double click for renaming
+    
     const handleDoubleClick = (key) => {
-        setEditingResume(key); // Set the resume key as being edited
-        setNewName(resumeNames[key]); // Set the current name in the input field
+        setEditingResume(key); 
+        setNewName(resumeNames[key]); 
     };
 
     const renderBodyContent = () => {

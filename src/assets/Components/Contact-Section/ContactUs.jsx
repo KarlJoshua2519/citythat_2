@@ -11,7 +11,7 @@ const ContactUs = () => {
           leftElement.classList.add('in-view');
         }
       });
-    }, { threshold: 0.1 }); // Adjust threshold if needed
+    }, { threshold: 0.1 }); 
 
     observer.observe(leftElement);
 

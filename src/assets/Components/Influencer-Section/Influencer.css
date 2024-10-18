@@ -131,3 +131,7 @@
     background-color: #994d00;
     transform: scale(1.05);
 }
+
+form::-webkit-scrollbar {
+    display: none;
+}

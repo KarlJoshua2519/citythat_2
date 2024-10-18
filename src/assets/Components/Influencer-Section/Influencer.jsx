@@ -82,7 +82,7 @@ const Influencer = () => {
                                 <p className="category">{influencer.category}</p>
                             </div>
                         ))}
-                        
+
                         {influencers.map((influencer, index) => (
                             <div key={index + 15} className="influencer-card">
                                 <img src={influencer.avatar} alt={`${influencer.name} Avatar`} className="influencer-avatar" />
@@ -101,53 +101,112 @@ const Influencer = () => {
             </div>
 
             <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-                <h2 className="modal-title">Influencer Application Form</h2>
-                <form className="application-form">
-                    <div>
-                        <label htmlFor="name">Name:</label>
-                        <input type="text" id="name" placeholder="Your full name" required />
-                    </div>
-                    <div>
-                        <label htmlFor="email">Email:</label>
-                        <input type="email" id="email" placeholder="Your email" required />
-                    </div>
-                    <div>
-                        <label htmlFor="category">Category:</label>
-                        <select id="category" required>
-                            <option value="">Select your category</option>
-                            <option value="Lifestyle">Lifestyle</option>
-                            <option value="Fitness">Fitness</option>
-                            <option value="Tech">Tech</option>
-                            <option value="Travel">Travel</option>
-                            <option value="Beauty">Beauty</option>
-                            <option value="Gaming">Gaming</option>
-                            <option value="Music">Music</option>
-                            <option value="Food">Food</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label htmlFor="followers">Followers:</label>
-                        <input type="number" id="followers" placeholder="Number of followers" required />
-                    </div>
-                    <div>
-                        <label htmlFor="bio">About You:</label>
-                        <textarea id="bio" placeholder="Tell us about yourself" rows="4" required></textarea>
-                    </div>
-                    <div>
-                        <label htmlFor="instagram">Instagram URL:</label>
-                        <input type="url" id="instagram" placeholder="Link to your Instagram profile" />
-                    </div>
-                    <div>
-                        <label htmlFor="youtube">YouTube URL:</label>
-                        <input type="url" id="youtube" placeholder="Link to your YouTube channel" />
-                    </div>
-                    <div>
-                        <label htmlFor="profile-picture">Profile Picture:</label>
-                        <input type="file" id="profile-picture" accept="image/*" required />
-                    </div>
-                  
-                    <button type="submit">Submit Application</button>
-                </form>
+                <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+                    <h2 className="text-4xl font-bold mb-8 text-primary text-center">Influencer Application Form</h2>
+                    <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label htmlFor="name" className="block text-sm font-semibold text-gray-800">Name:</label>
+                            <input
+                                type="text"
+                                id="name"
+                                placeholder="Your full name"
+                                required
+                                className="mt-1 block w-full border-2 border-go-primary rounded-md shadow-sm focus:ring-2 focus:ring-primary p-3 transition duration-200 ease-in-out hover:border-primary"
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="email" className="block text-sm font-semibold text-gray-800">Email:</label>
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="Your email"
+                                required
+                                className="mt-1 block w-full border-2 border-primary rounded-md shadow-sm focus:ring-2 focus:ring-primary p-3 transition duration-200 ease-in-out hover:border-primary"
+                            />
+                        </div>
+
+                        <div className="col-span-1 md:col-span-2">
+                            <label htmlFor="category" className="block text-sm font-semibold text-gray-800">Category:</label>
+                            <select
+                                id="category"
+                                required
+                                className="mt-1 block w-full border-2 border-primary rounded-md shadow-sm focus:ring-2 focus:ring-primary p-3 transition duration-200 ease-in-out hover:border-primary"
+                            >
+                                <option value="">Select your category</option>
+                                <option value="Lifestyle">Lifestyle</option>
+                                <option value="Fitness">Fitness</option>
+                                <option value="Tech">Tech</option>
+                                <option value="Travel">Travel</option>
+                                <option value="Beauty">Beauty</option>
+                                <option value="Gaming">Gaming</option>
+                                <option value="Music">Music</option>
+                                <option value="Food">Food</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label htmlFor="followers" className="block text-sm font-semibold text-gray-800">Followers:</label>
+                            <input
+                                type="number"
+                                id="followers"
+                                placeholder="Number of followers"
+                                required
+                                className="mt-1 block w-full border-2 border-primary rounded-md shadow-sm focus:ring-2 focus:ring-primary p-3 transition duration-200 ease-in-out hover:border-primary"
+                            />
+                        </div>
+
+                        <div className="col-span-1 md:col-span-2">
+                            <label htmlFor="bio" className="block text-sm font-semibold text-gray-800">About You:</label>
+                            <textarea
+                                id="bio"
+                                placeholder="Tell us about yourself"
+                                rows="4"
+                                required
+                                className="mt-1 block w-full border-2 border-primary rounded-md shadow-sm focus:ring-2 focus:ring-primary p-3 transition duration-200 ease-in-out hover:border-primary"
+                            ></textarea>
+                        </div>
+
+                        <div>
+                            <label htmlFor="instagram" className="block text-sm font-semibold text-gray-800">Instagram URL:</label>
+                            <input
+                                type="url"
+                                id="instagram"
+                                placeholder="Link to your Instagram profile"
+                                className="mt-1 block w-full border-2 border-primary rounded-md shadow-sm focus:ring-2 focus:ring-primary p-3 transition duration-200 ease-in-out hover:border-primary"
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="youtube" className="block text-sm font-semibold text-gray-800">YouTube URL:</label>
+                            <input
+                                type="url"
+                                id="youtube"
+                                placeholder="Link to your YouTube channel"
+                                className="mt-1 block w-full border-2 border-primary rounded-md shadow-sm focus:ring-2 focus:ring-primary p-3 transition duration-200 ease-in-out hover:border-primary"
+                            />
+                        </div>
+
+                        <div className="col-span-1 md:col-span-2">
+                            <label htmlFor="profile-picture" className="block text-sm font-semibold text-gray-800">Profile Picture:</label>
+                            <input
+                                type="file"
+                                id="profile-picture"
+                                accept="image/*"
+                                required
+                                className="mt-1 block w-full border-2 border-primary rounded-md shadow-sm focus:ring-2 focus:ring-primary p-3 transition duration-200 ease-in-out hover:border-primary"
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            className="col-span-1 md:col-span-2 mt-4 w-full bg-primary text-white font-bold py-3 rounded-md shadow-md hover:bg-primary transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary"
+                        >
+                            Submit Application
+                        </button>
+                    </form>
+                </div>
+
             </Modal>
 
         </div>
