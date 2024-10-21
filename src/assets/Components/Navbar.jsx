@@ -6,7 +6,7 @@ const Navbar = () => {
 
   return (
     <nav className="w-full p-4 flex bg-white flex-row items-center justify-between fixed top-0 border-b border-[#E4E4E4] left-0 z-50">
-      <img className="w-auto h-[3em]" src={logo} alt="" />
+      <a href="/"><img className="w-auto h-[3em]" src={logo} alt="" /></a>
       <ul className="text-[#666666] text-[0.8em] font-medium flex flex-row gap-10 relative">
         <li
           className="relative"
@@ -23,7 +23,7 @@ const Navbar = () => {
              <h1 className="text-lg font-bold">Our Story</h1>
              <div className="bg-primary w-full h-1"></div>
              <ul className="flex flex-col gap-2 mt-6">
-               <li><a href="#">ABOUT US</a></li>
+               <li><a href="/about">ABOUT US</a></li>
                <li><a href="#">TIMELINE</a></li>
                <li><a href="#">LEADERSHIP</a></li>
              </ul>

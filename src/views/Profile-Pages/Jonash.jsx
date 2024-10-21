@@ -11,9 +11,11 @@ import luis from '../../assets/images/luis.jpg'
 import janela from '../../assets/images/woman.png'
 import joper from '../../assets/images/joper.jpg'
 import plumberavatar from '../../assets/images/top-plumber.png'
-import jbresume from '../../assets/PDF/JB-Resume.pdf'
 import resume1 from '../../assets/images/Resume-images/JB-Resume_page1.jpg'
 import resume2 from '../../assets/images/Resume-images/JB-Resume_page2.jpg'
+import resumepdf from '../../assets/PDF/JB-Resume.pdf'
+import EngineerDashboard from '../../assets/Components/EngineerDashboard';
+import ToggleSwitch from '../../assets/Components/ToggleSwitch';
 
 
 
@@ -77,7 +79,6 @@ const Jonash = () => {
     const [activeResumes, setActiveResumes] = useState([resume1, resume2]);
     const [resumeNames, setResumeNames] = useState({
         construction: 'Construction Resume',
-        cybersecurity: 'Cybersecurity Resume',
         developer: 'Developer Resume',
     });
 
@@ -95,43 +96,41 @@ const Jonash = () => {
 
 
 
-    const [editingResume, setEditingResume] = useState(null); 
-    const [newName, setNewName] = useState(''); 
+    const [editingResume, setEditingResume] = useState(null);
+    const [newName, setNewName] = useState('');
 
-   
+
     const resumes = {
         construction: {
             files: [resume1, resume2],
         },
-        cybersecurity: {
+        developer: {
             files: [resume1],
         },
-        developer: {
-            files: [resume2],
-        },
+
     };
 
 
     const handleResumeClick = (key) => {
-        setActiveResumes(resumes[key].files); 
+        setActiveResumes(resumes[key].files);
     };
 
-    
+
     const handleNameChange = (key) => {
         if (newName.trim()) {
             setResumeNames({
                 ...resumeNames,
-                [key]: newName, 
+                [key]: newName,
             });
         }
-        setEditingResume(null); 
-        setNewName(''); 
+        setEditingResume(null);
+        setNewName('');
     };
 
-    
+
     const handleDoubleClick = (key) => {
-        setEditingResume(key); 
-        setNewName(resumeNames[key]); 
+        setEditingResume(key);
+        setNewName(resumeNames[key]);
     };
 
     const renderBodyContent = () => {
@@ -172,12 +171,9 @@ const Jonash = () => {
 
                         <h1 className="text-[#666666] font-bold tracking-wide mt-10 mx-10 text-4xl">Albums</h1>
                         <Album />
-
-
-
                         <section className="w-full flex flex-col p-10">
                             <h1 className="text-3xl font-bold text-[#666666] tracking-wide">Word of Mouth</h1>
-
+                            <ToggleSwitch />
                             <div className="w-full grid grid-cols-3 gap-4 mt-10 flex-wrap">
                                 {teamMembers.map((member, index) => (
                                     <a href=''
@@ -208,14 +204,18 @@ const Jonash = () => {
                 );
             case 'dashboard':
                 return (
-                    <div className="w-full h-screen p-6">
-                        <h1 className="text-3xl text-center font-bold">Dashboard Section</h1>
-                        {/* Add dashboard content here */}
+                    <div>
+                        <EngineerDashboard />
                     </div>
                 );
             case 'resume':
                 return (
                     <div className="w-full p-10 flex flex-col">
+                        <a className="absolute right-10 w-[10em] px-4 py-2 bg-gray-700 text-center text-white" href={resumepdf} download>
+                            <button type="button">
+                                Download PDF
+                            </button>
+                        </a>
                         <ul className="w-full flex flex-row gap-6 mb-4">
                             {Object.keys(resumes).map((key) => (
                                 <li key={key} className="flex items-center gap-2">
@@ -237,17 +237,17 @@ const Jonash = () => {
                                             />
                                         ) : (
                                             <span
-                                                onDoubleClick={() => handleDoubleClick(key)} // Enable double-click to edit
+                                                onDoubleClick={() => handleDoubleClick(key)}
                                                 className="font-bold cursor-pointer"
                                             >
-                                                {resumeNames[key]} {/* Display the current resume name */}
+                                                {resumeNames[key]}
                                             </span>
                                         )}
                                     </a>
                                 </li>
                             ))}
                         </ul>
-                        <div className="w-full flex flex-wrap justify-center gap-2">
+                        <div className="w-full flex flex-wrap justify-center mt-6 gap-2">
                             {activeResumes.length > 0 ? (
                                 activeResumes.map((resume, index) => (
                                     <img
@@ -258,7 +258,7 @@ const Jonash = () => {
                                     />
                                 ))
                             ) : (
-                                <p className="text-center">Select a resume to view.</p> // Message when no resumes are active
+                                <p className="text-center">Select a resume to view.</p>
                             )}
                         </div>
                     </div>
@@ -267,7 +267,7 @@ const Jonash = () => {
                 return (
                     <div className="w-full h-screen p-6">
                         <h1 className="text-3xl text-center font-bold">Blog Section</h1>
-                        {/* Add blog content here */}
+
                     </div>
                 );
             default:
@@ -281,14 +281,14 @@ const Jonash = () => {
 
         <div className="w-full h-auto flex flex-col mt-20">
 
-            <img className="w-full h-[25em] object-cover" src={coverphoto} alt="" />
+            <img className="w-full h-[35em] object-cover object-bottom" src={coverphoto} alt="" />
             <nav className="relative lato w-full bg-white py-4 px-10 border-b border-gray-800 flex flex-row items-center justify-between">
                 <ul className="w-full flex flex-row items-center justify-center gap-32 mr-20">
-                    <li><a href="#" onClick={() => handleNavClick('newsFeed')}>News Feed</a></li>
-                    <li><a href="#" onClick={() => handleNavClick('dashboard')}>Dashboard</a></li>
+                    <li><a className="cursor-pointer hover:text-white hover:bg-gray-600 p-2 rounded-xl" onClick={() => handleNavClick('newsFeed')}>News Feed</a></li>
+                    <li><a className="cursor-pointer hover:text-white hover:bg-gray-600 p-2 rounded-xl" onClick={() => handleNavClick('dashboard')}>Dashboard</a></li>
                 </ul>
 
-                {/* Avatar centered in the navbar */}
+
                 <img
                     className="absolute w-[14em] rounded-full border-primary border-4 object-cover h-auto"
                     src={avatar}
@@ -302,8 +302,8 @@ const Jonash = () => {
 
 
                 <ul className="w-full flex flex-row justify-center gap-32 ml-20">
-                    <li><a className="cursor-pointer" onClick={() => handleNavClick('resume')}>Resume</a></li>
-                    <li><a className="cursor-pointer" onClick={() => handleNavClick('blog')}>BLOG</a></li>
+                    <li><a className="cursor-pointer hover:text-white hover:bg-gray-600 p-2 rounded-xl" onClick={() => handleNavClick('resume')}>Resume</a></li>
+                    <li><a className="cursor-pointer hover:text-white hover:bg-gray-600 p-2 rounded-xl" onClick={() => handleNavClick('blog')}>BLOG</a></li>
                 </ul>
             </nav>
 

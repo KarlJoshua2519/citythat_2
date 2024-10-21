@@ -10,7 +10,7 @@ import Joper from './views/Profile-Pages/Joper';
 import ChatBot from './assets/Components/Chatbot';
 import ProfileNav from './views/Profile-Pages/ProfileNav';
 import MarketPlace from './views/MarketPlace/MarketPlace';
-
+import AboutUs from './views/AboutUs';
 function App() {
 
   return (
@@ -20,10 +20,11 @@ function App() {
       
       <Routes>
         <Route path="/" element={<><Navbar /><Home /></>} />
+        <Route path="/about" element={<><Navbar /><AboutUs /></>} />
         <Route path="/jonash" element={<><ProfileNav/><Jonash /></>} />
         <Route path="/marketplace" element={<MarketPlace />} />
-        <Route path="/luis" element={<Luis />} />
-        <Route path="/joper" element={<Joper />} />
+        <Route path="/luis" element={<><ProfileNav/><Luis /></>} />
+        <Route path="/joper" element={<><ProfileNav/><Joper /></>} />
       </Routes>
       <ChatBot/>
       <Footer/>
