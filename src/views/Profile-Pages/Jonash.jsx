@@ -25,21 +25,24 @@ const teamMembers = [
         role: "(Role Name)",
         location: "Los Angeles",
         image: luis,
-        bgColor: "bg-health"
+        bgColor: "bg-health",
+        link: "/luis"
     },
     {
         name: "Janela Pangan",
         role: "Cybersecurity",
         location: "Toronto, Canada",
         image: janela,
-        bgColor: "bg-music"
+        bgColor: "bg-music",
+        link: "/luis"
     },
     {
         name: "Joper Tupas",
         role: "Plumbing Engineer",
         location: "789 Oak St. City",
         image: joper,
-        bgColor: "bg-engr"
+        bgColor: "bg-engr",
+        link: "/joper"
     },
     {
         name: "Emily Davis",
@@ -176,7 +179,7 @@ const Jonash = () => {
                             <ToggleSwitch />
                             <div className="w-full grid grid-cols-3 gap-4 mt-10 flex-wrap">
                                 {teamMembers.map((member, index) => (
-                                    <a href=''
+                                    <a href={member.link}
                                         key={index}
                                         className={`${member.bgColor} flex p-10 flex-col items-center justify-center`}
                                     >

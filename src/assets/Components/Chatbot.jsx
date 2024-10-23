@@ -48,6 +48,8 @@ const ChatBot = () => {
                 botResponse = 'We are located at 12146 South St. C, Artesia, CA 90701'; // Shortened for brevity
             }
 
+           
+
 
           
             setMessages((prevMessages) => [

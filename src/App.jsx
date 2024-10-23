@@ -11,6 +11,8 @@ import ChatBot from './assets/Components/Chatbot';
 import ProfileNav from './views/Profile-Pages/ProfileNav';
 import MarketPlace from './views/MarketPlace/MarketPlace';
 import AboutUs from './views/AboutUs';
+import RegisterForm from './views/auth/RegisterForm';
+import LoginForm from './views/auth/LoginForm';
 function App() {
 
   return (
@@ -25,6 +27,9 @@ function App() {
         <Route path="/marketplace" element={<MarketPlace />} />
         <Route path="/luis" element={<><ProfileNav/><Luis /></>} />
         <Route path="/joper" element={<><ProfileNav/><Joper /></>} />
+        
+        <Route path="/register" element={<RegisterForm />} />
+        <Route path="/login" element={<LoginForm />} />
       </Routes>
       <ChatBot/>
       <Footer/>

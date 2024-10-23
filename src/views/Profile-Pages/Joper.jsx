@@ -33,21 +33,24 @@ const teamMembers = [
         role: "(Role Name)",
         location: "Los Angeles",
         image: luis,
-        bgColor: "bg-health"
+        bgColor: "bg-health",
+        link:"/luis"
     },
     {
         name: "Janela Pangan",
         role: "Cybersecurity",
         location: "Toronto, Canada",
         image: janela,
-        bgColor: "bg-music"
+        bgColor: "bg-music",
+        link:"/janela"
     },
     {
         name: "Jonash Bundalian",
         role: "(Role Name)",
         location: "Los Angeles",
         image: jonash,
-        bgColor: "bg-food"
+        bgColor: "bg-food",
+        link:"/jonash"
     },
     {
         name: "Emily Davis",
