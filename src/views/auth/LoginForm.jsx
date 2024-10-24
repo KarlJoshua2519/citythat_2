@@ -55,7 +55,7 @@ const LoginForm = () => {
 
           <p className="text-sm text-center">
             Don't have an account?{' '}
-            <a className="text-primary font-bold" href="">
+            <a className="text-primary font-bold" href="/register">
               Register
             </a>
           </p>

@@ -6,7 +6,7 @@ import instagram from '../../assets/images/instagram.svg'
 import xlogo from '../../assets/images/x-icon.svg'
 import linkedin from '../../assets/images/linkedin.svg'
 import '../App.css'
-import Album from '../../assets/Components/Album';
+import Album from '../../assets/Album/Album';
 import luis from '../../assets/images/luis.jpg'
 import janela from '../../assets/images/woman.png'
 import jonash from '../../assets/images/jonash.jpg'
