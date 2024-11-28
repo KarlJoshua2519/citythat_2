@@ -18,7 +18,7 @@ const MarketPlace = () => {
             <header className="market-header">
                 <div className="market-header-container">
                     <div className="left-market-header">
-                        <button className="wallet-btn"><img className="add-img" src={add} alt="" />Wallet</button>
+                        <a className="wallet-btn" href="/wallet" target="_blank"><img className="add-img" src={add} alt="" />Wallet</a>
                         <div className="wallet-txt">
                             <p className="market-header-txt">My Balance:</p>
                             <p className="amount-balance">$100,000</p>

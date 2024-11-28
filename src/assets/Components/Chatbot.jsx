@@ -68,7 +68,7 @@ const ChatBot = () => {
         }
     }, [messages]);
 
-    // Close the chatbox if clicked outside
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (chatBoxRef.current && !chatBoxRef.current.contains(event.target)) {

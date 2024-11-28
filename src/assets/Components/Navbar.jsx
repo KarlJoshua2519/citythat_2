@@ -32,6 +32,7 @@ const Navbar = () => {
          
           )}
         </li>
+        <li><a target="_blank" href="/marketplace" className="">MARKETPLACE</a></li>
         <li><a href="#">SIGN UP</a></li>
         <li><a href="#">LOG IN</a></li>
       </ul>

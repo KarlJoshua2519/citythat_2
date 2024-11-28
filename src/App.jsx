@@ -13,6 +13,7 @@ import AboutUs from './views/AboutUs';
 import RegisterForm from './views/auth/RegisterForm';
 import LoginForm from './views/auth/LoginForm';
 import AlbumPage from './assets/Album/AlbumPage';
+import Wallet from './views/MarketPlace/Wallet';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/joper" element={<><ProfileNav /><Joper /></>} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/wallet" element={<><Wallet /></>} />
         <Route path="/album/:id" element={<><ProfileNav /><AlbumPage /></>} /> 
       </Routes>
       <ChatBot />
