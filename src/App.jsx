@@ -14,7 +14,7 @@ import RegisterForm from './views/auth/RegisterForm';
 import LoginForm from './views/auth/LoginForm';
 import AlbumPage from './assets/Album/AlbumPage';
 import Wallet from './views/MarketPlace/Wallet';
-
+import Profile from './views/Profile-Pages/Profile';
 function App() {
   return (
     <Router>
@@ -28,6 +28,7 @@ function App() {
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/wallet" element={<><Wallet /></>} />
+        <Route path="/profile" element={<><Navbar /><Profile /></>} />
         <Route path="/album/:id" element={<><ProfileNav /><AlbumPage /></>} /> 
       </Routes>
       <ChatBot />
