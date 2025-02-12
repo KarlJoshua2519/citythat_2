@@ -21,7 +21,7 @@ const LoginForm = () => {
     setErrMsg(''); // Reset error messages
 
     try {
-      const response = await axios.post('http://10.113.231.140:5019/api/Auth/Login', {
+      const response = await axios.post('http://ctythat.com/api/Auth/Login', {
         Email: email,
         Password: pwd,
       });

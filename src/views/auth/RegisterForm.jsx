@@ -130,7 +130,7 @@ const RegisterForm = () => {
       if (resume) formData.append('Resume', resume);
       formData.append('UserType', '1');
 
-      const response = await axios.post('http://10.113.231.140:5019/api/User', formData, {
+      const response = await axios.post('http://ctythat.com/api/User', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
