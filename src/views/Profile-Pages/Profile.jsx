@@ -1,108 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import coverphoto from '../../assets/images/photo2.jpg';
-
-import axios from 'axios';
-
-import resume1 from '../../assets/images/Resume-images/JB-Resume_page1.jpg';
-import resume2 from '../../assets/images/Resume-images/JB-Resume_page2.jpg';
-import resumepdf from '../../assets/PDF/JB-Resume.pdf';
 import EngineerDashboard from '../../assets/Components/EngineerDashboard';
-import ToggleSwitch from '../../assets/Components/ToggleSwitch';
-import luis from '../../assets/images/luis.jpg'
-import janela from '../../assets/images/woman.png'
-import joper from '../../assets/images/joper.jpg'
-import plumberavatar from '../../assets/images/top-plumber.png'
+import ResumeSection from '../../assets/Components/ResumeSection';
 import editbtn from '../../assets/images/editbtn.svg'
 import addimg from '../../assets/images/add.svg';
+import Cropper from "react-cropper";
+import "cropperjs/dist/cropper.css";
+import { ProfileJs } from '../../assets/js/ProfileJs';
 
 const Profile = () => {
-    const [activeSection, setActiveSection] = useState('newsFeed');
-    const [isAnimating, setIsAnimating] = useState(false);
-    const [user, setUser] = useState(null);
-    const [activeResumes, setActiveResumes] = useState([resume1, resume2]);
-    const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
-    const [editedName, setEditedName] = useState(''); // State for edited name
-    const [isModalUploadOpen, setIsModalUploadOpen] = useState(false);
-    const [selectedFile, setSelectedFile] = useState(null);
-
-    const handleUploadClick = () => {
-        setIsModalUploadOpen(true);
-    };
-
-    const handleCloseModal = () => {
-        setIsModalUploadOpen(false);
-        setSelectedFile(null); // Reset selected file on cancel
-    };
-
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            setSelectedFile(file); // Store the selected file
-        }
-    };
-
-    const handleUploadSave = () => {
-        if (selectedFile) {
-            console.log("Saving file:", selectedFile);
-
-        } else {
-            alert("Please select a file before saving.");
-        }
-        setIsModalOpen(false);
-    };
-
-    useEffect(() => {
-        const token = localStorage.getItem('authToken');
-        if (token) {
-            axios
-                .get('http://10.113.231.140:5019/api/Auth', {
-                    headers: { Authorization: `Bearer ${token}` },
-                })
-                .then((response) => {
-                    setUser(response.data);
-                })
-                .catch((error) => {
-                    console.error('Error fetching user data:', error);
-                });
-        }
-    }, []);
-
-    const openModal = () => setIsModalOpen(true);
-    const closeModal = () => setIsModalOpen(false);
-
-    const handleSave = () => {
-
-
-        closeModal();
-    };
-
-    const handleNavClick = (section) => {
-        if (section !== activeSection && !isAnimating) {
-            setIsAnimating(true);
-            setTimeout(() => {
-                setActiveSection(section);
-                setIsAnimating(false);
-            }, 500);
-        }
-    };
-
+    const {
+        activeSection,
+        user,
+        isModalOpen,
+        isModalUploadOpen,
+        isAnimating,
+        isCropModalOpen,
+        editedProfile,
+        cropperRef,
+        selectedImage,
+        handleNavClick,
+        handleFileChange,
+        handleInputChange,
+        handleUploadClick,
+        handleCropSave,
+        handleSave,
+        openModal,
+        closeModal
+    } = ProfileJs();
     const renderBodyContent = () => {
         switch (activeSection) {
             case 'newsFeed':
                 return (
                     <div className="body-content flex flex-col items-center ">
+
                         <div className="px-20 my-10">
-                            <p className="text-lg text-justify font-medium lato tracking-wide leading-relaxed">A computer engineer who joined Breen Design Group in 2016.
-                                He works with the Electrical department on low-voltage projects
-                                and has extensive experience in network consulting and low-voltage
-                                design, particularly for high-rise buildings, hospitals, commercial
-                                properties, residential developments, and schools. He has been involved
-                                in various aerospace projects around southern California and numerous
-                                affordable housing projects over nearly a decade. In addition to his role
-                                as a Low Voltage Designer, Jonash is also an in-house Solutions Cloud
-                                Architect using Amazon Web Services and serves as a technology consultant
-                                for Breen Design Group's clients. He has prior training in Cisco Technology
-                                and holds a bachelor’s degree in computer engineering.</p>
+                            <p className="text-lg text-justify lato tracking-wide leading-relaxed">
+                                {!user ? 'Loading description...' : user.description ? user.description : <span className="text-gray-600 opacity-50">No Description</span>}
+                            </p>
+
                         </div>
                         <h1 className="w-full bg-[#666666] text-white text-center text-3xl p-4 font-bold">PORTFOLIO</h1>
                         <div className="g-content g-grid my-10">
@@ -138,21 +74,7 @@ const Profile = () => {
                 return <EngineerDashboard />;
             case 'resume':
                 return (
-                    <div className="w-full p-10 flex flex-col">
-                        <a className="absolute right-10 w-[10em] px-4 py-2 bg-gray-700 text-center text-white" href={resumepdf} download>
-                            <button type="button">Download PDF</button>
-                        </a>
-                        <div className="w-full flex flex-wrap justify-center mt-6 gap-2">
-                            {activeResumes.map((resume, index) => (
-                                <img
-                                    key={index}
-                                    className="shadow-lg w-[45%] object-cover"
-                                    src={resume}
-                                    alt={`Active Resume ${index + 1}`}
-                                />
-                            ))}
-                        </div>
-                    </div>
+                    <ResumeSection />
                 );
             default:
                 return null;
@@ -231,11 +153,11 @@ const Profile = () => {
                     </li>
                 </ul>
 
-                {/* Profile Image */}
+        
                 {user && (
                     <img
                         className="absolute bg-white w-[14em] rounded-full border-primary border-4 object-cover h-auto"
-                        src={`http://10.113.231.140:5019/${user.image}`}
+                        src={`https://api.ctythat.com/${user.image}`}
                         alt="Profile"
                         style={{ left: '50%', transform: 'translateX(-50%)' }}
                     />
@@ -261,7 +183,6 @@ const Profile = () => {
                 </ul>
             </nav>
 
-
             <div className="flex flex-col w-full items-center mt-24">
                 <div className="flex flex-row gap-4 items-center">
                     <h1 className="text-xl font-medium tracking-wide">
@@ -277,122 +198,75 @@ const Profile = () => {
                 </div>
             </div>
 
-
-
-
             <div className={`transition-opacity duration-500 ease-in-out ${isAnimating ? 'opacity-0' : 'opacity-100'}`}>
                 {renderBodyContent()}
             </div>
 
-
-
-            {/* Modal Component */}
             {isModalOpen && (
                 <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
                     <div className="bg-white rounded-lg p-6 w-[70em] shadow-lg relative">
                         <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>
-
-                        {/* Input Field */}
-
                         <div className="grid grid-cols-2 gap-4">
                             <div>
-                                <label className="block mb-2 text-gray-700 font-medium">First Name:</label>
-                                <input
-                                    type="text"
-                                    value={editedName}
-                                    onChange={(e) => setEditedName(e.target.value)}
-                                    className="w-full p-2 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-gray-400"
-                                />
-
+                                <label className="block mb-2">First Name:</label>
+                                <input type="text" name="firstName" value={editedProfile.firstName} onChange={handleInputChange} className="w-full p-2 border rounded-md" />
                             </div>
                             <div>
-                                <label className="block mb-2 text-gray-700 font-medium">Last Name:</label>
-                                <input
-                                    type="text"
-                                    value={editedName}
-                                    onChange={(e) => setEditedName(e.target.value)}
-                                    className="w-full p-2 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-gray-400"
-                                />
-
+                                <label className="block mb-2">Last Name:</label>
+                                <input type="text" name="lastName" value={editedProfile.lastName} onChange={handleInputChange} className="w-full p-2 border rounded-md" />
                             </div>
-
-
                             <div className="col-span-2">
-                                <label className="block mb-2 text-gray-700 font-medium">Description:</label>
-                                <textarea
-
-                                    rows="5"
-                                    className="w-full p-2 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-gray-400 resize-none"
-                                    placeholder="Enter your description here..."
-                                />
-
-
-
+                                <label className="block mb-2">Description:</label>
+                                <textarea name="description" rows="5" value={editedProfile.description} onChange={handleInputChange} className="w-full p-2 border rounded-md" />
                             </div>
-
-
-
-                            <div className="">
-                                <label className="block mb-2 text-gray-700 font-medium">Profile Picture:</label>
-                                <input
-
-                                    type="file"
-                                    accept="image/*"
-
-                                    className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400"
-                                />
-
-
-
-
+                            <div>
+                                <label className="block mb-2">Profile Picture:</label>
+                                <input type="file" name="profilePicture" accept="image/*" onChange={handleFileChange} className="w-full p-2 border rounded-md" />
                             </div>
-
-
-                            <div className="">
-                                <label className="block mb-2 text-gray-700 font-medium">Resume:</label>
-                                <input
-
-                                    type="file"
-                                    accept="image/*"
-
-                                    className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400"
-                                />
-
-
-
-
+                            <div>
+                                <label className="block mb-2">Resume:</label>
+                                <input type="file" name="resume" accept="application/pdf" onChange={handleFileChange} className="w-full p-2 border rounded-md" />
                             </div>
-
-
-
-
                         </div>
-
-
-
-                        {/* Buttons */}
                         <div className="flex justify-end mt-6 gap-4">
-                            <button
-                                onClick={closeModal}
-                                className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
-                            >
+                            <button onClick={closeModal} className="bg-gray-400 text-white px-4 py-2 rounded">Cancel</button>
+                            <button onClick={handleSave} className="bg-blue-500 text-white px-4 py-2 rounded">Save</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+
+            {isCropModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                    <div className="bg-white p-4 rounded-lg shadow-lg">
+                        <h2 className="text-lg font-bold mb-4">Crop Your Profile Picture</h2>
+                        <Cropper
+                            ref={cropperRef}
+                            src={selectedImage}
+                            style={{ height: 400, width: 500 }}
+                            aspectRatio={1} 
+                            viewMode={1}
+                            guides={false}
+                            minCropBoxWidth={200}
+                            minCropBoxHeight={200}
+                            background={false}
+                            responsive={true}
+                            autoCropArea={1}
+                            checkOrientation={false}
+                        />
+                        <div className="flex justify-end gap-2 mt-4">
+                            <button className="bg-gray-500 text-white px-4 py-2 rounded" onClick={() => setIsCropModalOpen(false)}>
                                 Cancel
                             </button>
-                            <button
-                                onClick={handleSave}
-                                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                            >
+                            <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleCropSave}>
                                 Save
                             </button>
                         </div>
                     </div>
                 </div>
             )}
-
         </div>
-
-
-
     );
 };
 

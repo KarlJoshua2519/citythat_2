@@ -12,7 +12,7 @@ const Navbar = () => {
     if (token) {
       // Fetch user data using the token
       axios
-        .get('http://10.113.231.140:5019/api/Auth', {
+        .get('https://api.ctythat.com/api/Auth', {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
@@ -66,9 +66,9 @@ const Navbar = () => {
             onMouseEnter={() => setShowProfileMenu(true)} 
             onMouseLeave={() => setShowProfileMenu(false)}
           >
-            {/* Display profile picture and initials */}
+
             <img
-              src={`http://10.113.231.140:5019/${user.image}`}
+              src={`https://api.ctythat.com/${user.image}`}
               alt="Profile"
               className="w-8 h-8 rounded-full object-cover"
             />
@@ -76,7 +76,7 @@ const Navbar = () => {
               {user.firstName[0]}{user.lastName[0]}
             </span>
 
-            {/* Profile menu dropdown */}
+ 
             {showProfileMenu && (
               <div className="absolute right-0 top-5 bg-white shadow-lg border mt-2 w-40 p-2 flex flex-col">
                 <a href="/profile" className="py-2 px-4 hover:bg-gray-100">My Profile</a>
