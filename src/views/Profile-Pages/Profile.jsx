@@ -19,6 +19,7 @@ const Profile = () => {
         isModalOpen,
         isModalUploadOpen,
         isCropModalOpen,
+        setIsCropModalOpen,
         editedProfile,
         cropperRef,
         selectedImage,
@@ -179,7 +180,7 @@ const Profile = () => {
 
                 {user && (
                     <img
-                        className="absolute bg-white w-[14em] rounded-full border-primary border-4 object-cover h-auto"
+                        className="absolute bg-white w-[14em] h-[14em] rounded-full border-primary border-4 object-cover h-auto"
                         src={`https://api.ctythat.com/${user.image}`}
                         alt="Profile"
                         style={{ left: '50%', transform: 'translateX(-50%)' }}

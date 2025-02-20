@@ -222,9 +222,9 @@ export const ProfileJs = () => {
         selectedFile,
         editedProfile,
         isCropModalOpen,
+        setIsCropModalOpen,
         selectedImage,
         cropperRef,
-
         openModal,
         closeModal,
         handleInputChange,
