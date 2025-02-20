@@ -7,19 +7,25 @@ import addimg from '../../assets/images/add.svg';
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import { ProfileJs } from '../../assets/js/ProfileJs';
+import uploadphoto from '../../assets/images/uploadphoto.svg'
+
 
 const Profile = () => {
+    const [isAnimating, setIsAnimating] = useState(false);
+    const [activeSection, setActiveSection] = useState('newsFeed');
     const {
-        activeSection,
+
         user,
         isModalOpen,
         isModalUploadOpen,
-        isAnimating,
         isCropModalOpen,
         editedProfile,
         cropperRef,
         selectedImage,
-        handleNavClick,
+        selectedFile,
+        handleCoverPhotoUpload,
+        handleCloseModal,
+       
         handleFileChange,
         handleInputChange,
         handleUploadClick,
@@ -28,6 +34,16 @@ const Profile = () => {
         openModal,
         closeModal
     } = ProfileJs();
+
+    const handleNavClick = (section) => {
+        if (section !== activeSection && !isAnimating) {
+            setIsAnimating(true);
+            setTimeout(() => {
+                setActiveSection(section);
+                setIsAnimating(false);
+            }, 500);
+        }
+    };
     const renderBodyContent = () => {
         switch (activeSection) {
             case 'newsFeed':
@@ -74,7 +90,8 @@ const Profile = () => {
                 return <EngineerDashboard />;
             case 'resume':
                 return (
-                    <ResumeSection />
+                    <ResumeSection user={user} />
+
                 );
             default:
                 return null;
@@ -84,18 +101,23 @@ const Profile = () => {
     return (
         <div className="w-full h-auto flex flex-col mt-20">
             <div className="relative w-full flex">
+
                 <img
-                    className="w-full h-[35em] object-cover object-bottom"
-                    src={coverphoto}
+                    className="w-full h-[80vh] brightness-[80%] object-cover"
+                    src={user?.cover ? `https://api.ctythat.com/${user.cover}?t=${new Date().getTime()}` : coverphoto}
                     alt="Cover"
                 />
-                <div className="absolute z-50 bottom-2 right-0 opacity-80">
+
+
+
+                <div className="absolute z-40 bottom-2 right-2 opacity-80">
                     <button
-                        className="rounded-md bg-primary text-white text-sm px-6 py-2 font-medium uppercase"
+                        className="bg-primary text-white text-sm w-[4em] h-[4em] opacity-80 hover:opacity-100 rounded-full font-medium uppercase"
                         onClick={handleUploadClick}
                     >
-                        Upload Cover Photo
+                       <img className=" w-[5em]" src={uploadphoto} alt="Upload Cover Photo" />
                     </button>
+
                 </div>
 
                 {isModalUploadOpen && (
@@ -122,10 +144,11 @@ const Profile = () => {
                                 </button>
                                 <button
                                     className="rounded-md bg-green-500 text-white px-4 py-2"
-                                    onClick={handleSave}
+                                    onClick={handleCoverPhotoUpload}  // <-- Call the function here
                                 >
                                     Save
                                 </button>
+
                             </div>
                         </div>
                     </div>
@@ -153,7 +176,7 @@ const Profile = () => {
                     </li>
                 </ul>
 
-        
+
                 {user && (
                     <img
                         className="absolute bg-white w-[14em] rounded-full border-primary border-4 object-cover h-auto"
@@ -227,6 +250,7 @@ const Profile = () => {
                                 <label className="block mb-2">Resume:</label>
                                 <input type="file" name="resume" accept="application/pdf" onChange={handleFileChange} className="w-full p-2 border rounded-md" />
                             </div>
+
                         </div>
                         <div className="flex justify-end mt-6 gap-4">
                             <button onClick={closeModal} className="bg-gray-400 text-white px-4 py-2 rounded">Cancel</button>
@@ -245,7 +269,7 @@ const Profile = () => {
                             ref={cropperRef}
                             src={selectedImage}
                             style={{ height: 400, width: 500 }}
-                            aspectRatio={1} 
+                            aspectRatio={1}
                             viewMode={1}
                             guides={false}
                             minCropBoxWidth={200}

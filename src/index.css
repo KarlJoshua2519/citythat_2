@@ -40,6 +40,11 @@ body {
     animation-delay: 0.4s;
 }
 
+.text-stroke {
+    -webkit-text-stroke: 0.5px black;
+    /* Adds a stroke */
+}
+
 @keyframes dot-blink {
     0% {
         opacity: 0;

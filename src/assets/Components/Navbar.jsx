@@ -57,7 +57,7 @@ const Navbar = () => {
           )}
         </li>
 
-        <li><a target="_blank" href="/marketplace" className="">MARKETPLACE</a></li>
+        <li><a href="/marketplace" className="">MARKETPLACE</a></li>
 
         {/* Conditionally render links based on user login status */}
         {user ? (

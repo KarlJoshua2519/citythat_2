@@ -39,7 +39,7 @@ const Featured = () => {
               <span className="f-arrow" />
               <article>
                 <h2 className="f-h2">Luis Jimenez</h2>
-                <div className="f-title">Role Name</div>
+                <div className="f-title">Project Manager</div>
                 <div className="f-pic">
                   <img className="f-avatar" src={luis} />
                 </div>
@@ -57,7 +57,7 @@ const Featured = () => {
               <span className="f-arrow" />
               <article>
                 <h2 className="f-h2">Janela Pangan</h2>
-                <div className="f-title">Role Name</div>
+                <div className="f-title">CISO</div>
                 <div className="f-pic">
                   <img className="f-avatar" src={janela} />
                 </div>

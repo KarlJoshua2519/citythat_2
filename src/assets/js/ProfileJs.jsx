@@ -2,9 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 export const ProfileJs = () => {
-    const [activeSection, setActiveSection] = useState('newsFeed');
-    const [isAnimating, setIsAnimating] = useState(false);
+
+   
     const [user, setUser] = useState(null);
+    const [resumeUrl, setResumeUrl] = useState(null);  // Store the resume URL
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalUploadOpen, setIsModalUploadOpen] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
@@ -19,8 +20,11 @@ export const ProfileJs = () => {
     const [isCropModalOpen, setIsCropModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const cropperRef = useRef(null);
+    
 
     useEffect(() => {
+        console.log(user?.coverPhoto);
+
         fetchUserData();
     }, []);
 
@@ -31,7 +35,10 @@ export const ProfileJs = () => {
                 headers: { Authorization: `Bearer ${token}` }
             })
                 .then(response => {
+                    console.log("User Data:", response.data);
+                    console.log("Cover Photo:", user?.coverPhoto);
                     setUser(response.data);
+                    setResumeUrl(response.data.resume);  // Store the resume URL
                     setEditedProfile({
                         firstName: response.data.firstName || '',
                         lastName: response.data.lastName || '',
@@ -42,15 +49,7 @@ export const ProfileJs = () => {
         }
     };
 
-    const handleNavClick = (section) => {
-        if (section !== activeSection && !isAnimating) {
-            setIsAnimating(true);
-            setTimeout(() => {
-                setActiveSection(section);
-                setIsAnimating(false);
-            }, 500);
-        }
-    };
+   
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
@@ -62,23 +61,73 @@ export const ProfileJs = () => {
     const handleUploadClick = () => {
         setIsModalUploadOpen(true);
     };
+    
+    const handleCoverPhotoUpload = async () => {
+        if (!selectedFile) {
+            console.error("No file selected.");
+            return;
+        }
+    
+        const formData = new FormData();
+        formData.append("Cover", selectedFile); 
+    
+        try {
+            const token = localStorage.getItem("authToken");
+            if (!token) {
+                console.error("No auth token found.");
+                return;
+            }
+    
+            const response = await axios.put(
+                "https://api.ctythat.com/api/User/UpdateUserCover",
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+            console.log(user?.coverPhoto);
 
+            console.log("Cover photo updated successfully!", response.data);
+            
+            setIsModalUploadOpen(false);
+            setSelectedFile(null);
+    
+       
+            fetchUserData(); 
+    
+        } catch (error) {
+            console.error("Error updating cover photo:", error.response?.data || error.message);
+        }
+    };
+    
     const handleCloseModal = () => {
         setIsModalUploadOpen(false);
-        setSelectedFile(null);
+       
     };
 
     const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
+    const file = e.target.files[0];
+    if (file) {
+        if (e.target.name === "profilePicture") {
             const reader = new FileReader();
             reader.onload = () => {
                 setSelectedImage(reader.result);
                 setIsCropModalOpen(true);
             };
             reader.readAsDataURL(file);
+        } else if (e.target.name === "resume") {
+            setEditedProfile({ ...editedProfile, resume: file });
+        } else {
+         
+            setSelectedFile(file); 
         }
-    };
+    }
+};
+
+    
 
     const handleCropSave = async () => {
         if (cropperRef.current) {
@@ -145,7 +194,7 @@ export const ProfileJs = () => {
             }
 
             if (editedProfile.resume) {
-                formData.append("resume", editedProfile.resume);
+                formData.append("Resume", editedProfile.resume); 
             }
 
             const response = await axios.put("https://api.ctythat.com/api/User", formData, {
@@ -156,6 +205,7 @@ export const ProfileJs = () => {
             });
 
             console.log("Profile updated successfully!", response.data);
+            
             fetchUserData();
             closeModal();
         } catch (error) {
@@ -164,19 +214,21 @@ export const ProfileJs = () => {
     };
 
     return {
-        activeSection,
+     
         user,
         isModalOpen,
+        resumeUrl,
         isModalUploadOpen,
         selectedFile,
         editedProfile,
         isCropModalOpen,
         selectedImage,
         cropperRef,
-        handleNavClick,
+
         openModal,
         closeModal,
         handleInputChange,
+        handleCoverPhotoUpload,
         handleUploadClick,
         handleCloseModal,
         handleFileChange,

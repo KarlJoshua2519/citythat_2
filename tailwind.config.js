@@ -6,6 +6,13 @@ export default {
     ],
     theme: {
         extend: {
+            screens: {
+
+                'sm': '310px',
+                'md': '650px',
+                'lg': '1024px',
+
+            },
             colors: {
                 'primary': '#b85b00',
                 'secondary': '#e0ff80',

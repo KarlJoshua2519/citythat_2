@@ -5,30 +5,8 @@ import missionappcoin from '../../assets/images/missionappcoin.png'
 
 const Wallet = () => {
     return (
-        <div className="min-h-screen flex flex-col">
-            <header className="market-header">
-                <div className="market-header-container">
-                    <div className="left-market-header">
-                        <button className="wallet-btn"><img className="add-img" src={add} alt="" />Wallet</button>
-                        <div className="wallet-txt">
-                            <p className="market-header-txt">My Balance:</p>
-                            <p className="amount-balance">$100,000</p>
-                        </div>
-
-                    </div>
-
-                    <div className="center-market-header">
-                        <p className="market-header-txt">Membership Status</p>
-                        <img className="missionapp-img" src={missionappcoin} alt="" />
-                        <p className="membership-rank">Bronze</p>
-                    </div>
-
-                    <div className="right-market-header">
-                        <p className="market-header-txt">Subscriptions</p>
-                    </div>
-                </div>
-
-            </header>
+        <div className="min-h-screen flex mt-20 flex-col">
+            
             <div className="min-h-screen flex flex-row w-full">
                 <aside className="w-1/4 bg-gray-800 text-white p-6 flex flex-col items-center">
                     <h2 className="text-2xl font-bold mb-10">My Wallet</h2>
