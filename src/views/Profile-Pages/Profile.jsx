@@ -3,11 +3,12 @@ import coverphoto from '../../assets/images/photo2.jpg';
 import EngineerDashboard from '../../assets/Components/EngineerDashboard';
 import ResumeSection from '../../assets/Components/ResumeSection';
 import editbtn from '../../assets/images/editbtn.svg'
-import addimg from '../../assets/images/add.svg';
+
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import { ProfileJs } from '../../assets/js/ProfileJs';
 import uploadphoto from '../../assets/images/uploadphoto.svg'
+import Albums from '../../assets/Components/Albums';
 
 
 const Profile = () => {
@@ -24,6 +25,7 @@ const Profile = () => {
         cropperRef,
         selectedImage,
         selectedFile,
+        lastProfileUpdate,
         handleCoverPhotoUpload,
         handleCloseModal,
        
@@ -74,16 +76,7 @@ const Profile = () => {
                             <a className="g-tile short" href="#"></a>
                         </div>
 
-                        <div className="flex h-screen flex-col w-full items-center gap-5">
-                            <div className="w-[90%]">
-                                <h1 className="text-[#666666] font-bold tracking-wide mt-10                                                                                                                                                                                                                             text-4xl">Albums</h1>
-                                <button className="mt-6 cursor-pointer flex flex-col items-center w-72 h-72 justify-center border border-dashed border-gray-400 rounded-lg overflow-hidden bg-gray-100 snap-start shrink-0">
-                                    <img className="w-auto h-[3.5em]" src={addimg} alt="" />
-                                    <h1 className="text-[#666666] font-medium text-lg">Add Album</h1>
-                                </button>
-                            </div>
-
-                        </div>
+                      <Albums/>
 
                     </div>
                 );
@@ -221,6 +214,15 @@ const Profile = () => {
                     </a>
                 </div>
             </div>
+
+            {lastProfileUpdate && (
+    <p>
+        {new Date(lastProfileUpdate).getTime() + 7 * 24 * 60 * 60 * 1000 > Date.now()
+            ? `You can update your profile picture in ${Math.ceil(((new Date(lastProfileUpdate).getTime() + 7 * 24 * 60 * 60 * 1000) - Date.now()) / (1000 * 60 * 60 * 24))} days.`
+            : "You can update your profile picture now!"}
+    </p>
+)}
+
 
             <div className={`transition-opacity duration-500 ease-in-out ${isAnimating ? 'opacity-0' : 'opacity-100'}`}>
                 {renderBodyContent()}

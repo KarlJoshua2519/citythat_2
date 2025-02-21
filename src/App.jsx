@@ -16,6 +16,7 @@ import Wallet from './views/MarketPlace/Wallet';
 import Profile from './views/Profile-Pages/Profile';
 import MarketPlacev2 from './views/MarketPlace/MarketPlacev2';
 import ComingSoon from './views/MarketPlace/ComingSoon';
+import AlbumPhotos from './views/AlbumPhotos';
 function App() {
   return (
     <Router>
@@ -31,7 +32,8 @@ function App() {
         <Route path="/wallet" element={<><Navbar /><Wallet /></>} />
         <Route path="/profile" element={<><Navbar /><Profile /></>} />
         <Route path="/comingsoonpage" element={<><Navbar /><ComingSoon /></>} />
-        <Route path="/album/:id" element={<><ProfileNav /><AlbumPage /></>} /> 
+       
+        <Route path="/album/:id" element={<><Navbar /><AlbumPhotos /></>} />
       </Routes>
       <ChatBot />
       <Footer />
